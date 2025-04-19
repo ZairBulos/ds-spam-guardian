@@ -1,3 +1,4 @@
 require("module-alias/register");
+const logger = require("@/config/logger");
 
-console.log("Hello, world!");
+logger.info("Hello, world!");
