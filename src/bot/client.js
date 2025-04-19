@@ -1,4 +1,6 @@
-const { Client, GatewayIntentBits } = require("discord.js");
+const { Client, GatewayIntentBits, Collection } = require("discord.js");
+loadCommands = require("./handlers/loadCommands");
+loadEvents = require("./handlers/loadEvents");
 
 const client = new Client({
   intents: [
@@ -7,5 +9,9 @@ const client = new Client({
     GatewayIntentBits.MessageContent,
   ],
 });
+
+client.commands = new Collection();
+loadCommands(client);
+loadEvents(client);
 
 module.exports = client;
