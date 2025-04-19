@@ -1,0 +1,16 @@
+# build and coverage directories
+build
+coverage
+
+# log files
+npm-debug.log*
+
+# environment files
+.env
+.env.production
+
+# dependency lock files
+package-lock.json
+
+# editor-specific settings
+.vscode/
