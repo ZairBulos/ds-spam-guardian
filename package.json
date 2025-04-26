@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "main": "src/index.js",
   "scripts": {
-    "dev": "nodemon",
+    "dev": "nodemon src/index.js",
+    "docker:dev": "docker-compose -f docker-compose.dev.yml down && docker-compose -f docker-compose.dev.yml up --build",
     "format": "npx prettier . --write",
     "test": "jest --runInBand"
   },

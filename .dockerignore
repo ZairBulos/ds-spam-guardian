@@ -1,0 +1,32 @@
+# Exclude local dependencies
+node_modules
+
+# Exclude IDE and development tool configurations
+.vscode/
+.github/
+
+# Exclude version control files
+.git/
+.gitignore
+
+# Exclude local configuration files
+.env*
+npm-debug.log*
+
+# Exclude logs and temporary files
+logs/
+*.log
+
+# Exclude test and coverage files
+tests/
+jest.config.js
+
+# Exclude documentation and unnecessary files
+docs/
+*.md
+LICENSE
+
+# Exclude Docker-related files
+.dockerignore
+Dockerfile*
+docker-compose*.yaml
