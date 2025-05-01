@@ -7,7 +7,7 @@ const loadCommands = (client) => {
     if ("data" in module && "execute" in module) {
       client.commands.set(module.data.name, module);
     } else {
-      logger.warn(
+      logger.error(
         `The command at ${path} is missing a required "data" or "execute" property.`,
       );
     }

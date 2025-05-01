@@ -11,7 +11,7 @@ commandFiles.forEach(({ module, path }) => {
   if ("data" in module && "execute" in module) {
     commands.push(module.data.toJSON());
   } else {
-    logger.warn(
+    logger.error(
       `The command at ${path} is missing a required "data" or "execute" property.`,
     );
   }

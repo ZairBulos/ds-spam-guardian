@@ -1,4 +1,6 @@
 const { createLogger, format, transports } = require("winston");
+const DailyRotateFile = require("winston-daily-rotate-file");
+const { NODE_ENV } = require("./config");
 
 const logger = createLogger({
   level: "info",
@@ -9,9 +11,29 @@ const logger = createLogger({
     }),
   ),
   transports: [
-    new transports.File({ filename: "logs/error.log", level: "error" }),
-    new transports.Console(),
+    new DailyRotateFile({
+      auditFile: "logs/error-audit.json",
+      filename: "logs/error-%DATE%.log",
+      datePattern: "YYYY-MM-DD",
+      zippedArchive: true,
+      level: "error",
+      maxSize: "20m",
+      maxFiles: "14d",
+    }),
+    new DailyRotateFile({
+      auditFile: "logs/warn-audit.json",
+      filename: "logs/warn-%DATE%.log",
+      datePattern: "YYYY-MM-DD",
+      zippedArchive: true,
+      level: "warn",
+      maxSize: "20m",
+      maxFiles: "14d",
+    }),
   ],
 });
+
+if (NODE_ENV !== "production") {
+  logger.add(new transports.Console());
+}
 
 module.exports = logger;

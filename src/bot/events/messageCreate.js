@@ -13,7 +13,7 @@ module.exports = {
 
       if (spamValidator.isSpam(cleanMessage)) {
         await message.delete();
-        logger.info(
+        logger.warn(
           `Spam detected from ${message.author.tag}: ${message.content}`,
         );
       }
