@@ -23,5 +23,9 @@ describe("SpamValidator Performance", () => {
   
       expect(duration).toBeLessThan(30);
     });
+  } else {
+    test("Performance tests are skipped in CI environments", () => {
+      console.log("Performance tests are only executed in local environments.");
+    });
   }
 });
