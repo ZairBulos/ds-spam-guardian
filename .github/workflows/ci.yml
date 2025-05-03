@@ -1,0 +1,35 @@
+name: 'Continuos Integration'
+
+on:
+  push:
+    branches: [ 'develop' ]
+
+env:
+  NODE_VERSION: '22.14'
+
+jobs:
+  ci:
+    name: 'Test - Unit & Integration & SonarQube Scan'
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Unit & Integration Tests
+        run: npm run test
+
+      - name: SonarQube Scan
+        if: success()
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
