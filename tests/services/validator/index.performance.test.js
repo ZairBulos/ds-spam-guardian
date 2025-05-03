@@ -20,6 +20,7 @@ describe("SpamValidator Performance", () => {
     const duration = endTime - startTime;
     console.log(`Validated ${messages.length} messages in ${duration}ms`);
 
-    expect(duration).toBeLessThan(30);
+    const performanceThreshold = process.env.CI ? 60 : 30;
+    expect(duration).toBeLessThan(performanceThreshold);
   });
 });

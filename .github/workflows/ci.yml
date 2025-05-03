@@ -5,6 +5,7 @@ on:
     branches: [ 'develop' ]
 
 env:
+  CI: true
   NODE_VERSION: '22.14'
 
 jobs:
