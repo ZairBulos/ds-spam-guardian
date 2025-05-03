@@ -1,6 +1,6 @@
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
-loadCommands = require("./handlers/loadCommands");
-loadEvents = require("./handlers/loadEvents");
+const loadCommands = require("./handlers/loadCommands");
+const loadEvents = require("./handlers/loadEvents");
 
 const client = new Client({
   intents: [
