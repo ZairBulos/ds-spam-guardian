@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "main": "src/index.js",
   "scripts": {
-    "dev": "node --watch src/index.js",
-    "start": "node src/index.js",
+    "dev": "node --env-file=.env.development --watch src/index.js",
+    "start": "node --env-file=.env.production src/index.js",
     "docker:prod": "docker-compose -f docker-compose.yml down && docker-compose -f docker-compose.yml up --build",
     "docker:dev": "docker-compose -f docker-compose.dev.yml down && docker-compose -f docker-compose.dev.yml up --build",
     "format": "npx prettier . --write",
@@ -19,7 +19,6 @@
   },
   "dependencies": {
     "discord.js": "^14.18.0",
-    "dotenv": "^16.5.0",
     "module-alias": "^2.2.3",
     "winston": "^3.17.0",
     "winston-daily-rotate-file": "^5.0.0"
