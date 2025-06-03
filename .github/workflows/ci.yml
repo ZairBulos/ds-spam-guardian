@@ -1,16 +1,16 @@
-name: 'Continuos Integration'
+name: "Continuos Integration"
 
 on:
   push:
-    branches: [ 'develop' ]
+    branches: ["develop"]
 
 env:
   CI: true
-  NODE_VERSION: '22.14'
+  NODE_VERSION: "22.14"
 
 jobs:
   ci:
-    name: 'Test - Unit & Integration & SonarQube Scan'
+    name: "Tests & SonarQube Scan"
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
@@ -26,8 +26,11 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Unit & Integration Tests
-        run: npm run test
+      - name: Run Unit Tests
+        run: npm run test:unit
+
+      - name: Run Integration Tests
+        run: npm run test:integration
 
       - name: SonarQube Scan
         if: success()

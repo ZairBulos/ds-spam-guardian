@@ -9,7 +9,10 @@
     "docker:prod": "docker-compose -f docker-compose.yml down && docker-compose -f docker-compose.yml up --build",
     "docker:dev": "docker-compose -f docker-compose.dev.yml down && docker-compose -f docker-compose.dev.yml up --build",
     "format": "npx prettier . --write",
-    "test": "jest --runInBand"
+    "test": "jest",
+    "test:unit": "jest tests/unit",
+    "test:integration": "jest tests/integration",
+    "test:performance": "jest tests/performance"
   },
   "keywords": [],
   "author": "",
