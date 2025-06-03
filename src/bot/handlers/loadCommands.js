@@ -1,4 +1,5 @@
 const loadFiles = require("@/utils/fileLoader");
+const logger = require("@/config/logger");
 
 const loadCommands = (client) => {
   const commands = loadFiles("bot/commands");
