@@ -6,8 +6,7 @@ FROM node:${NODE_VERSION} AS build
 WORKDIR /usr/src/app
 
 COPY package*.json ./
-
-RUN npm ci
+RUN npm ci && npm cache clean --force
 
 COPY . .
 

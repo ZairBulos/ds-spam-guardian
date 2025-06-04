@@ -6,14 +6,14 @@
   "scripts": {
     "dev": "node --env-file=.env.development --watch src/index.js",
     "start": "node --env-file=.env.production src/index.js",
-    "docker:prod": "docker-compose -f docker-compose.yml down && docker-compose -f docker-compose.yml up --build",
-    "docker:dev": "docker-compose -f docker-compose.dev.yml down && docker-compose -f docker-compose.dev.yml up --build",
+    "docker:prod": "docker-compose -f compose.yml up --build -d",
+    "docker:dev": "docker-compose -f compose.dev.yml up --build",
+    "lint": "eslint .",
     "format": "npx prettier . --write",
     "test": "jest",
     "test:unit": "jest tests/unit",
     "test:integration": "jest tests/integration",
-    "test:performance": "jest tests/performance",
-    "lint": "eslint ."
+    "test:performance": "jest tests/performance"
   },
   "keywords": [],
   "author": "",
