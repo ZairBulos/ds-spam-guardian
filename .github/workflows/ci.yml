@@ -1,16 +1,15 @@
-name: "Continuos Integration"
+name: Continuous Integration
 
 on:
   push:
     branches: ["develop"]
 
 env:
-  CI: true
   NODE_VERSION: "22.14"
 
 jobs:
   ci:
-    name: "Tests & SonarQube Scan"
+    name: Tests & SonarQube Scan
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
