@@ -1,4 +1,5 @@
 require("module-alias/register");
+require("./server");
 
 const { BOT_TOKEN } = require("@/config/config");
 const client = require("@/bot/client");
