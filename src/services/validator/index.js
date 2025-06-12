@@ -1,20 +1,11 @@
-const spamPhraseValidator = require("./spamPhraseValidator");
-
-class SpamValidator {
-  constructor() {
-    this.validators = [];
-  }
-
-  addValidator(validador) {
-    this.validators.push(validador);
-  }
-
-  isSpam(message) {
-    return this.validators.some((validator) => validator(message));
-  }
-}
+const SpamValidator = require("./SpamValidator");
+const SpamPhraseValidator = require("./SpamPhraseValidator");
+const PreprocessingDecorator = require("./decorators/PreprocessingDecorator");
 
 const spamValidator = new SpamValidator();
-spamValidator.addValidator(spamPhraseValidator);
+
+const decoratedSpamPhraseValidator = new PreprocessingDecorator(SpamPhraseValidator);
+
+spamValidator.addValidator(decoratedSpamPhraseValidator);
 
 module.exports = spamValidator;
