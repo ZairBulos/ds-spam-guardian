@@ -1,4 +1,3 @@
-const preprocessMessage = require("@/middlewares/preprocessMessage");
 const spamValidator = require("@/services/validator");
 const { performance } = require("perf_hooks");
 
@@ -28,9 +27,8 @@ describe("SpamValidator - Performance", () => {
     const start = performance.now();
 
     for (let i = 0; i < NUM_MESSAGES; i++) {
-      const msg = messages[i];
-      const cleaned = preprocessMessage(msg);
-      spamValidator.isSpam(cleaned);
+      const msg = { content: `${messages[i]} #${i}` };
+      spamValidator.isSpam(msg);
     }
 
     const end = performance.now();
