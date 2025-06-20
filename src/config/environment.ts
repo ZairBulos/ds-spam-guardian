@@ -4,6 +4,8 @@ loadEnvFile();
 
 const environment: Record<string, string> = {
   BOT_TOKEN: "",
+  REDIS_PORT: "",
+  REDIS_HOST: "",
 };
 
 Object.entries(environment).forEach(([key, value]) => {
