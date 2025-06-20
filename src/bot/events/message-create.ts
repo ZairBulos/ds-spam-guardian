@@ -1,12 +1,17 @@
-import { Event } from "../../core/interfaces/event";
 import { Events, Message } from "discord.js";
+import { Event } from "../../core/interfaces/event";
+import { buildSpamDetector } from "../../features/spam";
+
+const spamDetector = buildSpamDetector();
 
 class MessageCreateEvent implements Event<Events.MessageCreate> {
   public name = Events.MessageCreate;
 
-  public execute(message: Message): void {
-    if (message.author.bot || !message.guild) return;
-    console.log(`${message.author.tag}: ${message.content}`);
+  public async execute(message: Message): Promise<void> {
+    const spamDetected = await spamDetector.isSpam(message);
+    if (spamDetected) {
+      console.warn(`[SPAM DETECTED] ${message.author.tag}: ${message.content}`);
+    }
   }
 }
 
