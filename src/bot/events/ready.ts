@@ -1,4 +1,4 @@
-import { Event } from "../../core/interfaces/event.interface";
+import { Event } from "../../core/interfaces/event";
 import { Client, Events } from "discord.js";
 
 class ReadyEvent implements Event<Events.ClientReady> {

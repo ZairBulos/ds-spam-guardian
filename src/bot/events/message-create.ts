@@ -1,4 +1,4 @@
-import { Event } from "../../core/interfaces/event.interface";
+import { Event } from "../../core/interfaces/event";
 import { Events, Message } from "discord.js";
 
 class MessageCreateEvent implements Event<Events.MessageCreate> {

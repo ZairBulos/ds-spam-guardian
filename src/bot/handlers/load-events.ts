@@ -1,4 +1,4 @@
-import { Event } from "../../core/interfaces/event.interface";
+import { Event } from "../../core/interfaces/event";
 import { loadFiles } from "../../utils/load-files";
 import { Client } from "discord.js";
 

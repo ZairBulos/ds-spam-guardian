@@ -1,4 +1,4 @@
-import type { LoadedFile } from "../core/types/loaded-file.type";
+import type { LoadedFile } from "../core/types/loaded-file";
 import { readdirSync } from "fs";
 import path from "path";
 
