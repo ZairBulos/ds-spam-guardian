@@ -1,8 +1,8 @@
 import { RedisClient } from "../../config/redis-client";
 import { KeyValueStore } from "../contracts/storage/key-value-store";
-import { ListStore } from "../contracts/storage/list-store";
+import { KeyValueListStore } from "../contracts/storage/key-value-list-store";
 
-export class RedisService implements KeyValueStore, ListStore {
+export class RedisService implements KeyValueStore, KeyValueListStore {
   private redis = RedisClient.getInstance();
 
   async get<T = string>(key: string): Promise<T | null> {
@@ -15,7 +15,11 @@ export class RedisService implements KeyValueStore, ListStore {
     }
   }
 
-  async set<T = string>(key: string, value: T, ttlSeconds?: number): Promise<void> {
+  async set<T = string>(
+    key: string,
+    value: T,
+    ttlSeconds?: number
+  ): Promise<void> {
     try {
       const data = JSON.stringify(value);
       ttlSeconds
@@ -26,7 +30,7 @@ export class RedisService implements KeyValueStore, ListStore {
     }
   }
 
-  async getAllItems<T = string>(key: string): Promise<T[]> {
+  async getList<T = string>(key: string): Promise<T[]> {
     try {
       const items = await this.redis.lrange(key, 0, -1);
       return items.map((item) => JSON.parse(item) as T);
@@ -36,7 +40,7 @@ export class RedisService implements KeyValueStore, ListStore {
     }
   }
 
-  async pushItem<T = string>(key: string, value: T): Promise<void> {
+  async pushToList<T = string>(key: string, value: T): Promise<void> {
     try {
       const data = JSON.stringify(value);
       await this.redis.lpush(key, data);
@@ -45,7 +49,7 @@ export class RedisService implements KeyValueStore, ListStore {
     }
   }
 
-  async setExpire(key: string, ttlSeconds: number): Promise<void> {
+  async expire(key: string, ttlSeconds: number): Promise<void> {
     try {
       await this.redis.expire(key, ttlSeconds);
     } catch (err) {
