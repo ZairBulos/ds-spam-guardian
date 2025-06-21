@@ -1,5 +1,5 @@
 import { RedisService } from "../../core/services/redis-service";
-import { RedisSpamRepository } from "./repositories/spam-repository";
+import { RedisSpamRepository } from "./repositories";
 import { BehaviorSpamStrategy } from "./strategies/behavior-spam.strategy";
 import { SpamDetectorContext } from "./spam-detector.context";
 
