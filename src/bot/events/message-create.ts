@@ -1,8 +1,6 @@
 import { Events, Message } from "discord.js";
 import { Event } from "../../core/interfaces/event";
-import { buildSpamDetector } from "../../features/spam";
-
-const spamDetector = buildSpamDetector();
+import { spamDetector } from "../../features/spam/providers/spam-detector-redis.provider";
 
 class MessageCreateEvent implements Event<Events.MessageCreate> {
   public name = Events.MessageCreate;
