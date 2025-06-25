@@ -1,3 +1,4 @@
+import { logger } from "../../config/logger";
 import { RedisClient } from "../../config/redis-client";
 import { KeyValueStore } from "../contracts/storage/key-value-store";
 import { KeyValueListStore } from "../contracts/storage/key-value-list-store";
@@ -10,7 +11,7 @@ export class RedisService implements KeyValueStore, KeyValueListStore {
       const value = await this.redis.get(key);
       return value ? (JSON.parse(value) as T) : null;
     } catch (err) {
-      console.error(`Redis.get failed [${key}]`, err);
+      logger.error(`Redis.get failed ${err}`, "[REDIS]");
       return null;
     }
   }
@@ -26,7 +27,7 @@ export class RedisService implements KeyValueStore, KeyValueListStore {
         ? await this.redis.set(key, data, "EX", ttlSeconds)
         : await this.redis.set(key, data);
     } catch (err) {
-      console.error(`Redis.set failed [${key}]`, err);
+      logger.error(`Redis.set failed ${err}`, "[REDIS]");
     }
   }
 
@@ -35,7 +36,7 @@ export class RedisService implements KeyValueStore, KeyValueListStore {
       const items = await this.redis.lrange(key, 0, -1);
       return items.map((item) => JSON.parse(item) as T);
     } catch (err) {
-      console.error(`Redis.lrange failed [${key}]`, err);
+      logger.error(`Redis.lrange failed ${err}`, "[REDIS]");
       return [];
     }
   }
@@ -45,7 +46,7 @@ export class RedisService implements KeyValueStore, KeyValueListStore {
       const data = JSON.stringify(value);
       await this.redis.lpush(key, data);
     } catch (err) {
-      console.error(`Redis.lpush failed [${key}]`, err);
+      logger.error(`Redis.lpush failed ${err}`, "[REDIS]");
     }
   }
 
@@ -53,7 +54,7 @@ export class RedisService implements KeyValueStore, KeyValueListStore {
     try {
       await this.redis.expire(key, ttlSeconds);
     } catch (err) {
-      console.error(`Redis.expire failed [${key}]`, err);
+      logger.error(`Redis.expire failed ${err}`, "[REDIS]");
     }
   }
 }

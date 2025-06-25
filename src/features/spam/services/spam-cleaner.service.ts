@@ -1,5 +1,6 @@
 import { Collection, Guild, Message, TextBasedChannel } from "discord.js";
 import { hashContent } from "../../../utils/hash";
+import { logger } from "../../../config/logger";
 
 export class SpamCleaner {
   private readonly MESSAGE_FETCH_LIMIT = 10;
@@ -25,7 +26,7 @@ export class SpamCleaner {
       for (const spamMessage of spamMessages.values()) {
         deletions.push(
           spamMessage.delete().catch((err) => {
-            console.error(`[SPAM CLEANER] Failed to delete message`, err);
+            logger.error(`Failed to delete message ${err}`, "[SPAM CLEANER]");
           })
         );
       }
@@ -33,8 +34,9 @@ export class SpamCleaner {
 
     const results = await Promise.allSettled(deletions);
     const successful = results.filter((r) => r.status === "fulfilled").length;
-    console.log(
-      `[SPAM CLEANER] Deleted ${successful} spam messages from ${author.tag} in ${guild.name}`
+    logger.warn(
+      `Deleted ${successful} spam messages from ${author.username} in ${guild.name}`,
+      "[SPAM CLEANER]"
     );
   }
 

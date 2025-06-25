@@ -1,5 +1,6 @@
 import { Client, GatewayIntentBits } from "discord.js";
 import { loadEvents } from "./handlers/load-events";
+import { logger } from "../config/logger";
 
 export class DiscordBot extends Client {
   constructor() {
@@ -17,7 +18,7 @@ export class DiscordBot extends Client {
       loadEvents(this as Client);
       await this.login(token);
     } catch (err) {
-      console.error("Failed to login", err);
+      logger.error(`Falided to login ${err}`);
     }
   }
 }
