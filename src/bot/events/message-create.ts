@@ -12,14 +12,16 @@ class MessageCreateEvent implements Event<Events.MessageCreate> {
   public name = Events.MessageCreate;
 
   public async execute(message: Message): Promise<void> {
+    if (!message.guild) return;
+
     const spamDetected = await spamDetector.isSpam(message);
     if (!spamDetected) return;
 
     logger.warn(
-      `Detected spam from ${message.author.username} in ${message.guild?.name}: "${message.content}"`,
+      `Detected spam from ${message.author.username} in ${message.guild.name}: "${message.content}"`,
       "[SPAM DETECT]"
     );
-    void spamCleanupLock.run(message.author.id, async () => {
+    void spamCleanupLock.run(message.author.id, message.guild.id, async () => {
       await spamCleaner.deleteSpamMessages(message);
     });
   }
