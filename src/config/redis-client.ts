@@ -1,7 +1,7 @@
 import Redis from "ioredis";
 import environment from "./environment";
 
-export class RedisClient {
+class RedisClient {
   private static instance: Redis;
 
   private constructor() {}
@@ -17,3 +17,5 @@ export class RedisClient {
     return this.instance;
   }
 }
+
+export const redis = RedisClient.getInstance();
