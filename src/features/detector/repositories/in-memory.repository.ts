@@ -13,22 +13,22 @@ export class InMemorySpamRepository implements SpamRepository {
     return `message:${guildId}:${userId}:${hash}`;
   }
 
-  async getRecentEntries(
+  public async getRecentEntries(
     guildId: string,
     userId: string,
     hash: string,
     maxAgeMs: number
   ): Promise<MessageEntry[]> {
     const key = this.getKey(guildId, userId, hash);
+
     const entries = this.store.get(key) || [];
     const now = Date.now();
-
     return entries
       .filter((e) => now <= e.expiresAt && now - e.entry.timestamp <= maxAgeMs)
       .map((e) => e.entry);
   }
 
-  async saveMessageEntry(
+  public async saveMessageEntry(
     guildId: string,
     userId: string,
     hash: string,
@@ -43,9 +43,5 @@ export class InMemorySpamRepository implements SpamRepository {
     validEntries.unshift({ entry, expiresAt });
 
     this.store.set(key, validEntries);
-  }
-
-  clear(): void {
-    this.store.clear();
   }
 }

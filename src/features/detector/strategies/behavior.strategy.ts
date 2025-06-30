@@ -11,9 +11,7 @@ export class BehaviorSpamStrategy implements SpamDetectorStrategy {
 
   constructor(private repository: SpamRepository) {}
 
-  async isSpam(message: Message): Promise<boolean> {
-    if (!message.guild) return false;
-
+  public async isSpam(message: Message): Promise<boolean> {
     const { guildId, userId, hash, entry } = this.getEntry(message);
     await this.saveEntry(guildId, userId, hash, entry);
 
