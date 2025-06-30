@@ -2,7 +2,7 @@ import { Client, GatewayIntentBits } from "discord.js";
 import { loadEvents } from "./handlers/load-events";
 import { logger } from "../config/logger";
 
-export class DiscordBot extends Client {
+class DiscordBot extends Client {
   constructor() {
     super({
       intents: [

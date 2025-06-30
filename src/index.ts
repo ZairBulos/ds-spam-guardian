@@ -1,4 +1,4 @@
-import { client } from "./bot/client";
+import { client } from "./discord/client";
 import environment from "./environments/environment";
 
 (async () => {
