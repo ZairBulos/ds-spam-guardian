@@ -1,12 +1,12 @@
 import { Collection, Guild, Message, TextBasedChannel } from "discord.js";
-import { hashContent } from "../../../utils/hash";
-import { logger } from "../../../config/logger";
+import { hashContent } from "../../utils/hash";
+import { logger } from "../../config/logger";
 
 export class SpamCleaner {
   private readonly MESSAGE_FETCH_LIMIT = 10;
   private readonly TIME_WINDOW_MS = 60_000;
 
-  async deleteSpamMessages(message: Message): Promise<void> {
+  public async clean(message: Message): Promise<void> {
     const { guild, author, content, createdTimestamp } = message;
     if (!guild) return;
 
