@@ -1,5 +1,5 @@
 import Redis from "ioredis";
-import environment from "./environment";
+import environment from "../environments/environment";
 
 class RedisClient {
   private static instance: Redis;
@@ -9,7 +9,7 @@ class RedisClient {
   public static getInstance(): Redis {
     if (!this.instance) {
       this.instance = new Redis({
-        port: parseInt(environment.REDIS_PORT),
+        port: environment.REDIS_PORT,
         host: environment.REDIS_HOST,
       });
     }
