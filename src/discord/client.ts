@@ -1,8 +1,12 @@
-import { Client, GatewayIntentBits } from "discord.js";
+import { Client, Collection, GatewayIntentBits } from "discord.js";
+import { loadCommands } from "./handlers/load-commands";
 import { loadEvents } from "./handlers/load-events";
+import { Command } from "../core/interfaces/command";
 import { logger } from "../config/logger";
 
-class DiscordBot extends Client {
+export class DiscordBot extends Client {
+  public commands: Collection<string, Command> = new Collection();
+
   constructor() {
     super({
       intents: [
@@ -15,10 +19,11 @@ class DiscordBot extends Client {
 
   public async start(token: string): Promise<void> {
     try {
-      loadEvents(this as Client);
+      loadEvents(this);
+      loadCommands(this);
       await this.login(token);
     } catch (err) {
-      logger.error(`Falided to login ${err}`);
+      logger.error(`Falided to login ${err}`, "[DISCORD]");
     }
   }
 }
