@@ -1,4 +1,4 @@
-import { CommandInteraction, SlashCommandBuilder } from "discord.js";
+import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import { Command } from "../../core/interfaces/command";
 
 class PingCommand implements Command {
@@ -6,7 +6,9 @@ class PingCommand implements Command {
     .setName("ping")
     .setDescription("Replies with Pong!");
 
-  public async execute(interaction: CommandInteraction): Promise<void> {
+  public async execute(
+    interaction: ChatInputCommandInteraction
+  ): Promise<void> {
     await interaction.reply("Pong!");
   }
 }
