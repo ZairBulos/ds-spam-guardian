@@ -1,6 +1,6 @@
 import { Message } from "discord.js";
-import { SpamCleaner } from "./cleaner";
-import { SpamCleanupLock } from "./cleanup-lock";
+import { SpamCleaner } from "./services/cleaner.service";
+import { SpamCleanupLock } from "./locks/cleanup.lock";
 
 export const buildSpamCleaner = (lock: SpamCleanupLock) => {
   const cleaner = new SpamCleaner();

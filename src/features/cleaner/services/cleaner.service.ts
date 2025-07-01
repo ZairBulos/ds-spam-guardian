@@ -1,6 +1,6 @@
 import { Collection, Guild, Message, TextBasedChannel } from "discord.js";
-import { hashContent } from "../../utils/hash";
-import { logger } from "../../config/logger";
+import { hashContent } from "../../../utils/hash";
+import { logger } from "../../../config/logger";
 
 export class SpamCleaner {
   private readonly MESSAGE_FETCH_LIMIT = 10;
