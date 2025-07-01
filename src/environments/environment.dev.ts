@@ -10,6 +10,8 @@ for (const key of ENV_KEYS) {
 
 const environment: Environment = {
   BOT_TOKEN: env.BOT_TOKEN!,
+  BOT_CLIENT_ID: env.BOT_CLIENT_ID!,
+  BOT_GUILD_ID: env.BOT_GUILD_ID!,
   REDIS_PORT: Number(env.REDIS_PORT!),
   REDIS_HOST: env.REDIS_HOST!,
 };
